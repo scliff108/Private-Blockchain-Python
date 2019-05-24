@@ -20,7 +20,7 @@ class block:
     def validate(self):
         temp_block = self
         temp_block.hash = None
-        calculated_hash = sha256(json.dumps(temp_block.__dict__).encode())
+        calculated_hash = sha256(json.dumps(temp_block.__dict__).encode()).hexdigest()
         if calculated_hash is self.hash:
             return True
         return False
