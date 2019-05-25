@@ -37,3 +37,18 @@ class blockchain:
 
     def request_message_ownership_verification(self, address):
         return address + ':' + str(int(time.time())) + ':star_registry'
+
+    def submit_star(self, address, message, signature, star):
+        star_time = int(message.split(':')[1])
+        current_time = int(time.time())
+        if star_time > current_time - 300000:
+            return self.add_block(block_class.block({'owner':address, 'star':star}))
+            # TODO verify message with signature
+            """
+            if message verified:
+                self.add_block(block_class.block({'owner': address, 'star':star}))
+            else:
+                return "Error. Block message was not verified."
+            """
+        else:
+            return "Error. Block was not added due to timeout."
