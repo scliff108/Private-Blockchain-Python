@@ -5,7 +5,7 @@ ______________ to verify a message signature. The chain is stored in a list.
 Of course each time you run the application the chain will be empty because 
 a list is not a persistent storage method.
 """
-import block as block_class
+import src.block as block_class
 from hashlib import sha256
 import json
 import time
@@ -34,3 +34,6 @@ class blockchain:
         if self.chain[self.height] is block:
             return block
         return "Error. Block was not added"
+
+    def request_message_ownership_verification(self, address):
+        return address + str(int(time.time())) + ':star_registry'
