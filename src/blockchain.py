@@ -36,4 +36,4 @@ class blockchain:
         return "Error. Block was not added"
 
     def request_message_ownership_verification(self, address):
-        return address + str(int(time.time())) + ':star_registry'
+        return address + ':' + str(int(time.time())) + ':star_registry'
