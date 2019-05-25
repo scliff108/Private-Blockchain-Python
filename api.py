@@ -1,6 +1,6 @@
 import flask
 from flask import request, jsonify
-
+from src.blockchain import blockchain as blockchain
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -37,11 +37,12 @@ def api_block_height():
     return jsonify([block for block in blocks if block['height'] == height])
 
 # Endpoint that allows user to request Ownership of a Wallet address (POST Endpoint)
-@app.route('/request_validation', methods=['POST'])
+@app.route('/request_validation', methods=['GET', 'POST'])
 def api_request_validation():
+    print("Running api request validation")
     if 'address' in request.args:
         address = request.args['address']
-        message = request_message_ownership_verification(address) # TODO: Create request_message_ownership_verification(address) function
+        message = blockchain().request_message_ownership_verification(address) # TODO: Create request_message_ownership_verification(address) function
         if message:
             return message
         else:
