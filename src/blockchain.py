@@ -1,7 +1,15 @@
+"""
+The Blockchain class contains the basic functions to create your own private
+blockchain. It uses 'hashlib' to create the hashes for each block and
+______________ to verify a message signature. The chain is stored in a list.
+Of course each time you run the application the chain will be empty because 
+a list is not a persistent storage method.
+"""
 import block as block_class
 from hashlib import sha256
 import json
 import time
+
 class blockchain:
 
     def __init__(self):
