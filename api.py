@@ -26,7 +26,7 @@ blockchain = blockchain_class()
 
 @app.route('/', methods=['GET'])
 def home():
-    return '<h1>WELCOME</h1>'
+    return str(*[block.hash for block in blockchain.chain])
 
 # Endpoint to Get a Block by Height (GET Endpoint)
 @app.route('/block/height', methods=['GET'])
@@ -53,7 +53,7 @@ def api_request_validation():
 
 # Endpoint that allows you to submit a star. Must request ownership before submitting star.
 @app.route('/submit_star', methods=['GET', 'POST'])
-def submit_star():
+def api_submit_star():
     if 'address' in request.args and 'message' in request.args and 'signature' in request.args and 'star' in request.args:
         address = request.args['address']
         message = request.args['message']
@@ -67,6 +67,15 @@ def submit_star():
             return "Error. Something went wrong when submitting your star."
     else:
         return "Error. Check your Body Parameter."
+    
+# This endpoint allows you to retrieve the block by hash (GET endpoint)
+@app.route('/block/hash', methods=['GET'])
+def api_get_block_by_hash():
+    if 'hash' in request.args:
+        hash = request.args['hash']
+        return blockchain.get_block_by_hash(hash)
+    else:
+        return "Error. No hash field provided."
 
 # Get a specific piece of data by ID
 @app.route('/api/v1/resources/test_data', methods=['GET'])

@@ -52,3 +52,10 @@ class blockchain:
             """
         else:
             return "Error. Block was not added due to timeout."
+    
+    def get_block_by_hash(self, hash):
+        for block in self.chain:
+            if block.hash == hash:
+                return block.get_block_data()
+        return "Block not in chain."
+        # return block if it has the hash value
