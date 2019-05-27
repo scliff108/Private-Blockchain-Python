@@ -4,24 +4,7 @@ from src.blockchain import blockchain as blockchain_class
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-# Create some test data
-blocks = [
-    {
-        'height': 0,
-        'body': 'Test Genesis Block',
-        'time': 't'
-    },
-    {
-        'height': 1,
-        'body': 'Test 1st Block',
-        'time': 't+1'
-    },
-    {
-        'height': 2,
-        'body': 'Test Second Block',
-        'time': 't+2'
-    }
-]
+# Initialize Blockchain
 blockchain = blockchain_class()
 
 @app.route('/', methods=['GET'])
@@ -33,9 +16,9 @@ def home():
 def api_block_height():
     if 'height' in request.args:
         height = int(request.args['height'])
+        return str(*[block.get_block_data() for block in blockchain.chain if block.height == height])
     else:
         return "Error. No height field provided. Please specify a height."
-    return str(*[block.get_block_data() for block in blockchain.chain if block.height == height])
 
 # Endpoint that allows user to request Ownership of a Wallet address (POST Endpoint)
 @app.route('/request_validation', methods=['GET', 'POST'])
@@ -76,20 +59,5 @@ def api_get_block_by_hash():
         return blockchain.get_block_by_hash(hash)
     else:
         return "Error. No hash field provided."
-
-# Get a specific piece of data by ID
-@app.route('/api/v1/resources/test_data', methods=['GET'])
-def api_id():
-    """
-    Check if an ID was provided
-    If it was, assign it to a variable
-    If not, display an error
-    """
-    if 'id' in request.args:
-        id = int(request.args['id'])
-    else:
-        return "Error. No id field provided. Please specify an id."
-    
-    return jsonify([block for block in blocks if block['id'] == id])
 
 app.run()
