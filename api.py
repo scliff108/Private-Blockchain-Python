@@ -35,7 +35,7 @@ def api_block_height():
         height = int(request.args['height'])
     else:
         return "Error. No height field provided. Please specify a height."
-    return jsonify([block for block in blocks if block['height'] == height])
+    return str(*[block.get_block_data() for block in blockchain.chain if block.height == height])
 
 # Endpoint that allows user to request Ownership of a Wallet address (POST Endpoint)
 @app.route('/request_validation', methods=['GET', 'POST'])
