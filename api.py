@@ -9,7 +9,14 @@ blockchain = blockchain_class()
 
 @app.route('/', methods=['GET'])
 def home():
-    return str(*[block.hash for block in blockchain.chain])
+    blocks = ['<li>{}</li>'.format(block.hash) for block in blockchain.chain]
+    results = '<h1>Hash Values of Blocks in Blockchain</h1><br /><ol>'
+    for block in blocks:
+        print(type(block))
+        results += block
+        print(results)
+    results += '</ol>'
+    return results
 
 # Endpoint to Get a Block by Height (GET Endpoint)
 @app.route('/block/height', methods=['GET'])
@@ -44,8 +51,9 @@ def api_submit_star():
         star = request.args['star']
 
         block = blockchain.submit_star(address, message, signature, star)
+        print(block)
         if block:
-            return block
+            return str(block.get_block_data())
         else:
             return "Error. Something went wrong when submitting your star."
     else:
