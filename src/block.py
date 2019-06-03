@@ -17,6 +17,13 @@ class block:
         self.time = 0                                               # Timestamp for the Block creation
         self.previousBlockHash = None                               # Reference to the previous Block Hash
     
+    """
+    Function to make sure the block has not been tampered with.
+    If the data inside the block has been tampered with then the hash value
+    will be different than the hash of the block.
+    1. Return True if the block is valid.
+    2. Return False if the block has been tampered with.
+    """
     def validate(self):
         temp_block = self
         temp_block.hash = None
@@ -25,6 +32,13 @@ class block:
             return True
         return False
 
+    """
+    Return the decoded body of the block.
+    1. If the block is the genesis block, simply return "This is the Genesis Block"
+    2. Decode the data in the block body.
+    3. If there is data in the body, return it
+    4. If there is no data in the body, return with an error message.
+    """
     def get_block_data(self):
         if self.height is 0:
             return "This is the Genesis Block"
