@@ -1,12 +1,12 @@
 # Private-Blockchain-Python
 You will need to complete the following functions to complete this project.
 ## block.py
-1. validate(self)
-2. get_block_data(self)
+1. `validate(self)`
+2. `get_block_data(self)`
 ## blockchain.py
-1. add_block(self, block)
-2. submit_star(self, address, star)
-3. get_block_by_hash(self, hash)
+1. `add_block(self, block)`
+2. `submit_star(self, address, star)`
+3. `get_block_by_hash(self, hash)`
 
 ## What problem will you solve implementing this private Blockchain application?
 Your employer is trying to make a test of concept on how a Blockchain application can be implemented in his company. He is an astronomy fan and he spends most of his free time on searching stars in the sky, that's why he would like to create a test application that will allow him to register stars.
