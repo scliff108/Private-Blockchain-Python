@@ -23,14 +23,11 @@ class block:
     will be different than the hash of the block.
     1. Return True if the block is valid.
     2. Return False if the block has been tampered with.
+    Use this line of code to calculate the hash value:
+    sha256(json.dumps(temp_block.__dict__).encode()).hexdigest()
     """
     def validate(self):
-        temp_block = self
-        temp_block.hash = None
-        calculated_hash = sha256(json.dumps(temp_block.__dict__).encode()).hexdigest()
-        if calculated_hash is self.hash:
-            return True
-        return False
+        return True # TEMP RETURN VALUE
 
     """
     Return the decoded body of the block.
@@ -38,14 +35,8 @@ class block:
     2. Decode the data in the block body.
     3. If there is data in the body, return it
     4. If there is no data in the body, return with an error message.
+    Use this line of code to decode the data_object:
+    json.loads(bytes.fromhex(encoded_data).decode('ascii'))
     """
     def get_block_data(self):
-        if self.height is 0:
-            return "This is the Genesis Block"
-        encoded_data = self.body
-        data_object = json.loads(bytes.fromhex(encoded_data).decode('ascii'))
-
-        if data_object:
-            return data_object
-        else:
-            return "Error decoding the data object"
+        return True # TEMP RETURN VALUE

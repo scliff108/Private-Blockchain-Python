@@ -44,19 +44,11 @@ class blockchain:
     4. Set the hash of the block
     5. Append the block to the chain
     6. Increment the chain height.
+    Use this line of code to calculate the block hash:
+    sha256(json.dumps(block.__dict__).encode()).hexdigest()
     """
     def add_block(self, block):
-        block.height = self.height + 1
-        block.time = int(time.time())
-        if len(self.chain) > 0:
-            block.previousBlockHash = self.chain[self.height].hash
-        block.hash = sha256(json.dumps(block.__dict__).encode()).hexdigest()
-        self.chain.append(block)
-        self.height += 1
-
-        if self.chain[self.height] is block:
-            return block
-        return "Error. Block was not added"
+        return True # TEMP RETURN VALUE
 
     """
     submit_star(address, star) will allow users to register a new block with the 
@@ -65,7 +57,7 @@ class blockchain:
     2. Return the block
     """
     def submit_star(self, address, star):
-        return self.add_block(block_class.block({'owner':address, 'star':star}))
+        return True # TEMP RETURN VALUE
     
 
     """
@@ -75,7 +67,4 @@ class blockchain:
     2. Return the block or the error message.
     """
     def get_block_by_hash(self, hash):
-        for block in self.chain:
-            if block.hash == hash:
-                return str(block.get_block_data())
-        return "Block not in chain."
+        return True # TEMP RETURN VALUE
