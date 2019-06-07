@@ -5,8 +5,7 @@ ______________ to verify a message signature. The chain is stored in a list.
 Of course each time you run the application the chain will be empty because 
 a list is not a persistent storage method.
 """
-#import src.block as block_class
-import block as block_class
+import src.block as block_class
 from hashlib import sha256
 import json
 import time

@@ -21,6 +21,7 @@ class block:
         temp_hash = self.hash
         self.hash = None
         calculated_hash = sha256(json.dumps(self.__dict__).encode()).hexdigest()
+        self.hash = temp_hash
         if calculated_hash == temp_hash:
             return True
         return False
