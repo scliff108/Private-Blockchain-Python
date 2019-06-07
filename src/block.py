@@ -18,10 +18,10 @@ class block:
         self.previousBlockHash = None                               # Reference to the previous Block Hash
     
     def validate(self):
-        temp_block = self
-        temp_block.hash = None
-        calculated_hash = sha256(json.dumps(temp_block.__dict__).encode()).hexdigest()
-        if calculated_hash is self.hash:
+        temp_hash = self.hash
+        self.hash = None
+        calculated_hash = sha256(json.dumps(self.__dict__).encode()).hexdigest()
+        if calculated_hash == temp_hash:
             return True
         return False
 
